@@ -23,4 +23,5 @@ time2 = Time9'2022-2-27 23:00:00') -utcoffset
 times = [time1, time2]
 object = SkyCoord('12h00m00s', '+30d00m00s')#creating object at RA and dec
 objaltaz = object.transform_to(AltAz(obstime = times, location = WIRO)) #calculating alt and az
-print(objaltaz.alt)#printing results
+print(objaltaz.alt.degree)#printing results
+print(objaltaz.secz)#printing airmasses at this time
