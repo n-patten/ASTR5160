@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sfdmap
 from astropy.coordinates import SkyCoord #necessary imports
+from astropy import units as u
 
 ra1, dec1 = '16h39m43.92s', '+40d47m42s'
 ra2, dec2 = '15h46m14.88s', '+2d26m24s' #coordinates of both quasars
@@ -41,3 +42,13 @@ decgrid2 = np.linspace(35.8, 45.8, 100)
 mesh1 = np.meshgrid(ragrid1, decgrid1)
 mesh2 = np.meshgrid(ragrid2, decgrid2)
 #Mesh grids created, Task 2 complete
+
+xgrid, ygrid = np.meshgrid(ragrid1, decgrid1)
+cmesh = SkyCoord(xgrid*u.degree, ygrid*u.degree).galactic
+ebvgrid1 = m.ebv(cmesh.l.value, cmesh.b.value, frame = 'galactic')
+cs = plt.contourf(ragrid1, decgrid1, ebvgrid1) #contour 1
+
+xgrid2, ygrid2 = np.meshgrid(ragrid2, decgrid2)
+cmesh2 = SkyCoord(xgrid2*u.degree, ygrid2*u.degree).galactic
+ebvgrid2 = m.ebv(cmesh2.l.value, cmesh2.b.value, frame = 'galactic')
+cs2 = plt.contourf(ragrid2, decgrid2, ebvgrid2)
