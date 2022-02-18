@@ -1,14 +1,21 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import argparse
 from astropy.coordinates import SkyCoord, EarthLocation, AltAz
 from astropy import units as u
 from astropy.table import Table
 from astropy.time import Time # NP necessary imports
 
+parser = argparse.ArgumentParser(description = 'Lists quasars sorted by airmass.')
+parser.add_argument('month', metavar = 'm', type = int,help = 'Takes a number, m, which corresponds to a month in the year 2022 and returns a table of quasars observable from Kitt Peak Observatory sorted by airmass.')
+args = parser.parse_args()
+# NP Adding argparse
+
 def airmass(m):
     '''Takes a number, m, which corresponds to a month in the year 2022 and returns a table of 
         quasars observable from Kitt Peak Observatory sorted by airmass.'''
+
     df = pd.read_csv('/d/scratch/ASTR5160/week4/HW1quasarfile.txt', header = None, names=['Coordinates'])
     t = Table.from_pandas(df) # NP creating an astropy Table of the quasars
     ra = []
@@ -70,3 +77,6 @@ def airmass(m):
          names = ('Date','Quasar Coordinates (hms.ss deg arcmin ")', 'RA (deg)', 'Dec (deg)', 'Airmass'))
     # NP Defining a table that contains all of the sorted quasars and their associated information
     return t
+
+if __name__ == '__main__':
+    print(airmass(args.month))
