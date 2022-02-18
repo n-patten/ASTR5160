@@ -8,7 +8,7 @@ from astropy.table import Table
 from astropy.time import Time # NP necessary imports
 
 parser = argparse.ArgumentParser(description = 'Lists quasars sorted by airmass.')
-parser.add_argument('month', metavar = 'm', type = int,help = 'Takes a number, m, which corresponds to a month in the year 2022 and returns a table of quasars observable from Kitt Peak Observatory sorted by airmass.')
+parser.add_argument('month', metavar = 'm', type = int,help = 'Takes a number, m, which corresponds to a month in the year 2022 and returns a table of quasars observable from Kitt Peak Observatory, at 11 pm MST, sorted by airmass.')
 args = parser.parse_args()
 # NP Adding argparse
 
