@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 import argparse
 from astropy.coordinates import SkyCoord, EarthLocation, AltAz
@@ -51,7 +50,7 @@ def airmass(m):
         # NP Creating a list of times corresponding to all the days in the month
     for i in times:
         altaz.append(c.transform_to(AltAz(obstime=i,location=kpno)))
-        # NP Finding Alt and Az for each quasar in the last for every day in the month
+        # NP Finding Alt and Az for each quasar in the list for every day in the month
     for i in altaz:
         airmass.append(i.secz) # NP calculating airmass
     for i in airmass:
@@ -61,7 +60,7 @@ def airmass(m):
     sortedairmasses = np.sort(legitairmasses) # NP Sorting the airmasses
     for i in sortedairmasses:
         indices.append(np.where(airmass == i))
-        # NP Crearing a list of indices that point to a particular quasar
+        # NP Creating a list of indices that point to a particular quasar
     for i in indices:
         sortedtimes.append(i[0])
         quasarindex.append(i[1])
