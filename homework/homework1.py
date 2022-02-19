@@ -79,3 +79,6 @@ def airmass(m):
 
 if __name__ == '__main__':
     print(airmass(args.month))
+
+# NP I know I use a lot of for loops, but I honestly cannot think of any other way
+# NP of doing this
