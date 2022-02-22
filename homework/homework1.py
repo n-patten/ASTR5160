@@ -90,7 +90,7 @@ def get_airmass(filename, month):
      return times, quasars[ii], coords[ii].ra.value, coords[ii].dec.value, airmass
 
 
-if __name__ == "__main__": # AMC if quasar_airmass_homework1.py is main program
+if __name__ == "__main__":
      # ADM hardcode the filename.
      filename = "/d/scratch/ASTR5160/week4/HW1quasarfile.txt"
 
