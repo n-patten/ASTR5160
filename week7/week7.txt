@@ -1,0 +1,2 @@
+ NP This week was a coding week. All of the tasks are visible as the changes
+ made to the github repository.
