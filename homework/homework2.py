@@ -68,7 +68,7 @@ def populatesphere(amin, amax, dmin, dmax):
     # NP returning a filtered list of points only inside the lat-lon rectangle.
 
 if __name__ == '__main__':
-	parser = argparse.ArgumentParser(description = '')
+	parser = argparse.ArgumentParser(description = 'Generates a lat-lon rectangle from inputted variables and plots the rectangle in an Aitoff Projection. This plot is saved in the directory /d/www/nikhil/public_html/ASTR5160. Additionally generates 1000000 random points across the entire sphere and calculates which points are contained in the defined lat-lon rectangle. The fraction of the number of the 1000000 points that are inside the defined lat-lon rectangle compared to the total number of points is compared to the fraction of the area of the lat-lon rectangle to the entire area of the sphere.')
 	parser.add_argument('amin', metavar = 'amin', type = float, help = 'Minimum RA of the lat-lon rectangle. Expected input is in degrees.')
 	parser.add_argument('amax', metavar = 'amax', type = float, help = 'Maximum RA of the lat-lon rectangle. Expected input is in degrees.')
 	parser.add_argument('dmin', metavar = 'dmin', type = float, help = 'Minimum DEC of the lat-lon rectangle. Expected input is in degrees.')
@@ -78,7 +78,7 @@ if __name__ == '__main__':
 	print('Area of half of the sphere: '+str(area(0, 360, 0, 90))+' sq. deg.')
 	#Answer is consistent with the area of a hemisphere
 	print('Area of the lat-lon rectangle: '+str(area(args.amin, args.amax, args.dmin,
-	args.dmax))+'sq. deg.')
+	args.dmax))+' sq. deg.')
 	# NP Printing area of the inputted lat-lon rectangle
 	aitoffplot(args.amin, args.amax, args.dmin, args.dmax)
 	# NP Generating Aitoff plot of the inputted lat-lon rectangle
