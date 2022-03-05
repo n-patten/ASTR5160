@@ -69,10 +69,10 @@ def populatesphere(amin, amax, dmin, dmax):
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description = 'Generates a lat-lon rectangle from inputted variables and plots the rectangle in an Aitoff Projection. This plot is saved in the directory /d/www/nikhil/public_html/ASTR5160. Additionally generates 1000000 random points across the entire sphere and calculates which points are contained in the defined lat-lon rectangle. The fraction of the number of the 1000000 points that are inside the defined lat-lon rectangle compared to the total number of points is compared to the fraction of the area of the lat-lon rectangle to the entire area of the sphere.')
-	parser.add_argument('amin', metavar = 'amin', type = float, help = 'Minimum RA of the lat-lon rectangle. Expected input is in degrees.')
-	parser.add_argument('amax', metavar = 'amax', type = float, help = 'Maximum RA of the lat-lon rectangle. Expected input is in degrees.')
-	parser.add_argument('dmin', metavar = 'dmin', type = float, help = 'Minimum DEC of the lat-lon rectangle. Expected input is in degrees.')
-	parser.add_argument('dmax', metavar = 'dmax', type = float, help = 'Maximum DEC of the lat-lon rectangle. Expected input is in degrees.')
+	parser.add_argument('amin', metavar = 'amin', type = float, help = 'Minimum RA of the lat-lon rectangle. Expected input is in degrees. Values should be between -180 and +180.')
+	parser.add_argument('amax', metavar = 'amax', type = float, help = 'Maximum RA of the lat-lon rectangle. Expected input is in degrees. Values should be between -180 and +180')
+	parser.add_argument('dmin', metavar = 'dmin', type = float, help = 'Minimum DEC of the lat-lon rectangle. Expected input is in degrees. Values should be between -90 and +90')
+	parser.add_argument('dmax', metavar = 'dmax', type = float, help = 'Maximum DEC of the lat-lon rectangle. Expected input is in degrees. Values should be between -90 and +90')
 	args = parser.parse_args()
 	# NP Adding parser
 	print('Area of half of the sphere: '+str(area(0, 360, 0, 90))+' sq. deg.')
