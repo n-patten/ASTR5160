@@ -133,10 +133,10 @@ if __name__ == '__main__':
     # ADM note that indenting by 4 spaces is standard Python style.
     # ADM also note that Python style is to limit lines to ~70-80 characters.
     desc ="""Generates a lat-lon rectangle from inputted variables and plots
-    the rectangle in an Aitoff Projection. Additionally generates 1000000
+    the rectangle in an Aitoff Projection. Additionally generates 100000000
     random points across the entire sphere and calculates which points are
     contained in the defined lat-lon rectangle. The fraction of the number
-    of the 1000000 points that are inside the defined lat-lon rectangle
+    of the 100000000 points that are inside the defined lat-lon rectangle
     compared to the total number of points is compared to the fraction of
     the area of the lat-lot rectangle to the entire area of the sphere."""
     parser = argparse.ArgumentParser(description=desc)
