@@ -26,20 +26,16 @@ f.set_figwidth(8)
 f.set_figheight(5)
 # NP Making figure larger
 index = np.linspace(np.max(g), np.min(g), 5)
-# NP Generating a list of values between the min. and max. g mag.
+# NP Generating a list of magnitudes from max to min g mag.
+print(index)
 for i in range(4):
     ii = (g < index[i]) & (g > index[i+1])
     plt.scatter(ra[ii],dec[ii], color = 'blue', s = (6)*(i+1)**2)
-# NP Looping through this array to plot each point with a size according to its brightness
+# NP Looping through the list of g magnitudes and plotting them according
+# NP to size
 plt.xlabel('RA (deg)')
 plt.ylabel('Dec (deg)')
 plt.title('SDSS Objects within 2 arc mins of (300, -1) sized by g magnitude')
+# NP Labeling figure
 plt.savefig('/d/www/nikhil/public_html/ASTR5160/SDSSobjssized.png')
-# NP Plotting each of the binned objects with sizes corresponding to their
-# NP apparent magnitude
-plt.xlabel('RA (deg)')
-plt.ylabel('Dec (deg)')
-plt.title('SDSS Objects within 2 arc mins of (300, -1) sized by g magnitude')
-# NP Labeling the figure
-plt.savefig('/d/www/nikhil/public_html/ASTR5160/SDSSobjssized.png')
-# NP Saving the figure
+# NP Saving figure
