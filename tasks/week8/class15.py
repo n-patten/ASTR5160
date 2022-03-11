@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 # NP Necessary imports
 
@@ -20,24 +21,10 @@ plt.title('SDSS Objects within 2 arc mins of (300, -1)')
 plt.savefig('/d/www/nikhil/public_html/ASTR5160/SDSSobjs.png')
 # NP Saving the figure, task 2 complete
 
-i = (g <= 18)
-i2 = (g > 18) & (g <= 19)
-i3 = (g > 19) & (g <= 20)
-i4 = (g > 20) & (g <= 21)
-i5 = (g > 21) & (g <= 22)
-i6 = (g > 22) & (g <= 23)
-i7 = (g > 23) & (g <= 24)
-i8 = (g > 24) & (g <= 25)
-i9 = (g > 25)
-# NP Binning at different magnitude between 18 and 25
 f = plt.figure()
 f.set_figwidth(8)
 f.set_figheight(5)
-# NP Making the figure larger
-import numpy as np
-f = plt.figure()
-f.set_figwidth(8)
-f.set_figheight(5)
+# NP Making figure larger
 index = np.linspace(np.max(g), np.min(g), 5)
 # NP Generating a list of values between the min. and max. g mag.
 for i in range(4):
