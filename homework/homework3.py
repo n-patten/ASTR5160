@@ -55,100 +55,100 @@ def makerect(ramin, ramax, dmin, dmax):
 	# NP lon rectangle. ramax and dmax require flip=True
 	return [cap1, cap2, cap3, cap4]
 
-latloncaps = makerect(10.25, 11.25, 30, 40)
-# NP Making rectangle coverage for the survey
-makeply('rectangle', [latloncaps])
-# NP Making a ply file for the lat-lon rectangle
-rect = pymangle.Mangle('/d/users/nikhil/ASTR5160/homework/rectangle.ply')
-# NP Making mask from the lat-lon rectangle
-ra = 15.*(random(1000000)) +(10.25*15)
-dec= 10.*(random(1000000)) +30
-# NP Generating random points throughout the lat-lon rectangle
-# NP 1000000 random points were needed for a precision of 0.5 deg^2
-spec1 = np.append(latloncaps, [boundedbyraanddec(155/15, 34, 2)], axis = 0)
-spec2 = np.append(latloncaps, [boundedbyraanddec(159/15, 36, 2)], axis = 0)
-spec3 = np.append(latloncaps, [boundedbyraanddec(163/15, 34, 2)], axis = 0)
-spec4 = np.append(latloncaps, [boundedbyraanddec(167/15, 36, 2)], axis = 0)
-# NP Generating 4 polygons for the 4 spectroscopic regions
-allspecs = [spec1, spec2, spec3, spec4]
-# NP Combining them into one set of spherical cap list
-makeply('observation', allspecs)
-# NP Making polygons for each spectroscopic mask
-mobs = pymangle.Mangle('/d/users/nikhil/ASTR5160/homework/observation.ply')
-# NP Creating mask for each spectroscopic region
-inside = mobs.contains(ra, dec)
-# NP List of ra's/dec's inside the spectroscopic mask
-rectarea = area(10.25*15, 11.25*15, 30, 40)
-# NP Caculating the area of the entire lat-lon rectangle
-specarea = (len(ra[inside])/len(ra))*rectarea
-# NP Calculating the area of the masks using the rectangle area and points
-print(specarea)
+if (__name__ == '__main__'):
+	latloncaps = makerect(10.25, 11.25, 30, 40)
+	# NP Making rectangle coverage for the survey
+	makeply('rectangle', [latloncaps])
+	# NP Making a ply file for the lat-lon rectangle
+	rect = pymangle.Mangle('/d/users/nikhil/ASTR5160/homework/rectangle.ply')
+	# NP Making mask from the lat-lon rectangle
+	ra = 15.*(random(1000000)) +(10.25*15)
+	dec= 10.*(random(1000000)) +30
+	# NP Generating random points throughout the lat-lon rectangle
+	# NP 1000000 random points were needed for a precision of 0.5 deg^2
+	spec1 = np.append(latloncaps, [boundedbyraanddec(155/15, 34, 2)], axis = 0)
+	spec2 = np.append(latloncaps, [boundedbyraanddec(159/15, 36, 2)], axis = 0)
+	spec3 = np.append(latloncaps, [boundedbyraanddec(163/15, 34, 2)], axis = 0)
+	spec4 = np.append(latloncaps, [boundedbyraanddec(167/15, 36, 2)], axis = 0)
+	# NP Generating 4 polygons for the 4 spectroscopic regions
+	allspecs = [spec1, spec2, spec3, spec4]
+	# NP Combining them into one set of spherical cap list
+	makeply('observation', allspecs)
+	# NP Making polygons for each spectroscopic mask
+	mobs = pymangle.Mangle('/d/users/nikhil/ASTR5160/homework/observation.ply')
+	# NP Creating mask for each spectroscopic region
+	inside = mobs.contains(ra, dec)
+	# NP List of ra's/dec's inside the spectroscopic mask
+	rectarea = area(10.25*15, 11.25*15, 30, 40)
+	# NP Caculating the area of the entire lat-lon rectangle
+	specarea = (len(ra[inside])/len(ra))*rectarea
+	# NP Calculating the area of the masks using the rectangle area and points
+	print(specarea)
 
-# NP I know it wasn't required, but I made a plot of the masks and the lat-
-# NP lon rectangle for the spectroscopic regions and the survey to help me
-# NP visualize the problem.
-f = plt.figure()
-f.set_figwidth(8)
-f.set_figheight(5)
-# NP Making figure larger
-ra1 = 15.*(random(100000)) +(10.25*15)
-dec1 = 10.*(random(100000)) +30
-# NP Creating new ra's and dec's inside the lat-lon rectangle because
-# NP the original list of ra's and dec's took too long to plot on a
-# NP scatter plot.
-inside = mobs.contains(ra1, dec1)
-# NP Finding points that are inside the masks
-plt.scatter(ra1[inside], dec1[inside], color = 'blue', s = 0.5,
-	label = 'Spectroscopic plates')
-# NP Plotting the points inside the spectroscopic regions
-outside = ~(inside)
-# NP Defining the outside points
-plt.scatter(ra1[outside], dec1[outside], color = 'red', s = 0.5,
-	label = 'Survey')
-# NP Plotting the outside points
-plt.ylabel('Declination (degrees)')
-plt.xlabel('Right Ascension (degrees)')
-plt.title('Spectroscopic Plate Areas Overlayed the'
-	' Survey Lat-Lon Rectangle')
-# NP Labeling the graph
-plt.legend()
-# NP Creating a legend
-plt.savefig('/d/www/nikhil/public_html/ASTR5160/homework3test.png')
-# NP Saving the figure
-
-quasars = Table.read('/d/scratch/ASTR5160/week8/HW3quasarfile.dat',
-    format = 'ascii.no_header')
-# NP Reading in quasar list
-raq = ["{}h{}m{}s".format(q[0:2], q[2:4], q[4:9]) for q in quasars["col1"]]
-decq = ["{}d{}m{}s".format(q[9:12], q[12:14], q[14:18]) for q in quasars["col1"]]
-# NP Creating strings for the ra's and dec's for each quasar
-c = SkyCoord(raq, decq, frame = 'icrs')
-# NP Generating skycoords for each quasar
-raqlist = c.ra.value
-decqlist = c.dec.value
-# NP Obtaining a list of ra's and dec's in degree format
-inside = mobs.contains(raqlist, decqlist)
-outside = ~inside
-# NP Defining a list of indices whether each quasar is in the spectroscopic region
-f = plt.figure()
-f.set_figwidth(8)
-f.set_figheight(5)
-# NP Making figure bigger
-plt.scatter(raqlist[inside], decqlist[inside], color = 'blue',
-    s = 0.8, label = 'Quasars inside mask')
-# NP Plotting all the quasar that are inside the mask
-plt.scatter(raqlist[outside], decqlist[outside], color = 'green',
-    s = 0.8, label = 'Quasars outside mask')
-# NP Plotting all of the quasars that are outside of the mask
-plt.text(150, 18, 'Mask area: \n'+str(np.round(specarea,2))+' sq. deg.', size = 16)
-plt.text(165, 20, 'Quasar density: \n'+str(np.round(len(raqlist[inside])/specarea,2))
-    + ' quasars per sq. deg.', size = 16)
-# NP Annotating the graph with the mask area and quasar density
-plt.ylabel('Declination (degrees)')
-plt.xlabel('Right Ascension (degrees)')
-plt.title('Quasars from list color-coded inside and outside of the mask')
-# NP Labeling the graph
-plt.legend()
-# NP Creating a legend
-plt.savefig('/d/www/nikhil/public_html/ASTR5160/homework3.png')
-# NP Saving figure
+	# NP I know it wasn't required, but I made a plot of the masks and the lat-
+	# NP lon rectangle for the spectroscopic regions and the survey to help me
+	# NP visualize the problem.
+	f = plt.figure()
+	f.set_figwidth(8)
+	f.set_figheight(5)
+	# NP Making figure larger
+	ra1 = 15.*(random(100000)) +(10.25*15)
+	dec1 = 10.*(random(100000)) +30
+	# NP Creating new ra's and dec's inside the lat-lon rectangle because
+	# NP the original list of ra's and dec's took too long to plot on a
+	# NP scatter plot.
+	inside = mobs.contains(ra1, dec1)
+	# NP Finding points that are inside the masks
+	plt.scatter(ra1[inside], dec1[inside], color = 'blue', s = 0.5,
+		label = 'Spectroscopic plates')
+	# NP Plotting the points inside the spectroscopic regions
+	outside = ~(inside)
+	# NP Defining the outside points
+	plt.scatter(ra1[outside], dec1[outside], color = 'red', s = 0.5,
+		label = 'Survey')
+	# NP Plotting the outside points
+	plt.ylabel('Declination (degrees)')
+	plt.xlabel('Right Ascension (degrees)')
+	plt.title('Spectroscopic Plate Areas Overlayed the'
+		' Survey Lat-Lon Rectangle')
+	# NP Labeling the graph
+	plt.legend()
+	# NP Creating a legend
+	plt.savefig('/d/www/nikhil/public_html/ASTR5160/homework3test.png')
+	# NP Saving the figure
+	quasars = Table.read('/d/scratch/ASTR5160/week8/HW3quasarfile.dat',
+		format = 'ascii.no_header')
+	# NP Reading in quasar list
+	raq = ["{}h{}m{}s".format(q[0:2], q[2:4], q[4:9]) for q in quasars["col1"]]
+	decq = ["{}d{}m{}s".format(q[9:12], q[12:14], q[14:18]) for q in quasars["col1"]]
+	# NP Creating strings for the ra's and dec's for each quasar
+	c = SkyCoord(raq, decq, frame = 'icrs')
+	# NP Generating skycoords for each quasar
+	raqlist = c.ra.value
+	decqlist = c.dec.value
+	# NP Obtaining a list of ra's and dec's in degree format
+	inside = mobs.contains(raqlist, decqlist)
+	outside = ~inside
+	# NP Defining a list of indices whether each quasar is in the spectroscopic region
+	f = plt.figure()
+	f.set_figwidth(8)
+	f.set_figheight(5)
+	# NP Making figure bigger
+	plt.scatter(raqlist[inside], decqlist[inside], color = 'blue',
+	    s = 0.8, label = 'Quasars inside mask')
+	# NP Plotting all the quasar that are inside the mask
+	plt.scatter(raqlist[outside], decqlist[outside], color = 'green',
+	    s = 0.8, label = 'Quasars outside mask')
+	# NP Plotting all of the quasars that are outside of the mask
+	plt.text(150, 18, 'Mask area: \n'+str(np.round(specarea,2))+' sq. deg.', size = 16)
+	plt.text(165, 20, 'Quasar density: \n'+str(np.round(len(raqlist[inside])/specarea,2))
+	    + ' quasars per sq. deg.', size = 16)
+	# NP Annotating the graph with the mask area and quasar density
+	plt.ylabel('Declination (degrees)')
+	plt.xlabel('Right Ascension (degrees)')
+	plt.title('Quasars from list color-coded inside and outside of the mask')
+	# NP Labeling the graph
+	plt.legend()
+	# NP Creating a legend
+	plt.savefig('/d/www/nikhil/public_html/ASTR5160/homework3.png')
+	# NP Saving figure
