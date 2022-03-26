@@ -137,6 +137,7 @@ Z2s = 22.5-np.log10(FLUX_Z2s)
 Z3s = 22.5-np.log10(FLUX_Z3s)
 Z4s = 22.5-np.log10(FLUX_Z4s)
 # NP Calculating the g, W1, W2, r and z magnitudes for each star for each sweep
+# NP I got some warnings for null fluxes, but the programs procees.
 
 G1q = 22.5-np.log10(FLUX_G1q)
 G2q = 22.5-np.log10(FLUX_G2q)
@@ -159,6 +160,7 @@ Z2q = 22.5-np.log10(FLUX_Z2q)
 Z3q = 22.5-np.log10(FLUX_Z3q)
 Z4q = 22.5-np.log10(FLUX_Z4q)
 # NP Calculating the g, W1, W2, r and z magnitudes for each quasar for each sweep
+# NP I got some warnings for null fluxes, but the programs procees.
 
 f = plt.figure()
 f.set_figwidth(8)
@@ -174,6 +176,7 @@ plt.scatter(G2q - Z2q, R2q - W12q, color = 'red', s = 0.7)
 plt.scatter(G3q - Z3q, R3q - W13q, color = 'red', s = 0.7)
 plt.scatter(G4q - Z4q, R4q - W14q, color = 'red', s = 0.7)
 # NP Plotting all quasar objects
+# NP I got some warnings for null fluxes, but the programs procees.
 x = np.linspace(-0.5, 2.5, 100)
 y = -.8 + 1.05*x
 # NP Generating a fit by eye-balling
