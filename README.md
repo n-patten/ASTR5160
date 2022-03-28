@@ -6,14 +6,14 @@ Code for ASTR-5160 at the University of Wyoming
 
 Topics covered (not in order):
 
-Boolean indexing
+-Boolean indexing
 
-Arrays
+-Arrays
 
-Celestial coordinates
+-Celestial coordinates
 
-Areas on a sphere
+-Areas on a sphere
 
-Sections of the celestial sphere
+-Sections of the celestial sphere
 
-Pymangle
+-Pymangle
