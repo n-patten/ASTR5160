@@ -82,7 +82,7 @@ def class16():
 	plt.xlabel('Dec(deg)')
 	plt.title('Objects in the VLA FIRST survey')
 	# NP Labelling the figure
-	plt.savefig('/d/www/nikhil/public_html/ASTR5160/VLAFIRST.png')
+	plt.savefig('/d/www/nikhil/public_html/ASTR5160/images/VLAFIRST.png')
 	# NP Saving the figure
 	# NP Task 1 complete
 

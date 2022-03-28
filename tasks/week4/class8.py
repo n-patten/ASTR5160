@@ -37,5 +37,5 @@ plt.plot(ra2, dec2, 'db', label = 'Set 2')
 plt.plot(ra1[id1], dec1[id1], 'og', label = 'Close Points')
 plt.plot(ra2[id2], dec2[id2], 'og') #Plotting sets of data and close points
 plt.legend() #Creating legend
-plt.savefig('/d/users/nikhil/public_html/randompointswithmatch.png') #Saving
+plt.savefig('/d/users/nikhil/public_html/ASTR5160/images/randompointswithmatch.png') #Saving
 #Task 3 complete

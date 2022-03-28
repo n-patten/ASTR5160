@@ -17,6 +17,6 @@ print(hp.nside2pixarea(1))
 print(np.histogram(nside1,12)) # NP Each nside has roughly the same number of points
 
 plt.hist(nside1, bins = 12)
-plt.savefig('/d/www/nikhil/public_html/histogram.png')
+plt.savefig('/d/www/nikhil/public_html/ASTR5160/images/histogram.png')
 # NP histogram is flat, ra and dec evenly distributed about sphere
 # NP Task 3 complete

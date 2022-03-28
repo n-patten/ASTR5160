@@ -37,5 +37,5 @@ plt.xlabel('RA (deg)')
 plt.ylabel('Dec (deg)')
 plt.title('SDSS Objects within 2 arc mins of (300, -1) sized by g magnitude')
 # NP Labeling figure
-plt.savefig('/d/www/nikhil/public_html/ASTR5160/SDSSobjssized.png')
+plt.savefig('/d/www/nikhil/public_html/ASTR5160/images/SDSSobjssized.png')
 # NP Saving figure

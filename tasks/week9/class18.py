@@ -188,7 +188,7 @@ plt.xlabel('g-z')
 plt.ylabel('r-W1')
 plt.title('Color-color plots for stars and quasars')
 # NP Labeling figure
-plt.savefig('/d/www/nikhil/public_html/ASTR5160/starsquasars.png')
+plt.savefig('/d/www/nikhil/public_html/ASTR5160/images/starsquasars.png')
 # NP Saving plot
 
 def isquasar(rminusW1, gminusz):

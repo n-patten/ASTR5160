@@ -114,7 +114,7 @@ if (__name__ == '__main__'):
 	# NP Labeling the graph
 	plt.legend()
 	# NP Creating a legend
-	plt.savefig('/d/www/nikhil/public_html/ASTR5160/homework3test.png')
+	plt.savefig('/d/www/nikhil/public_html/ASTR5160/images/homework3test.png')
 	# NP Saving the figure
 	quasars = Table.read('/d/scratch/ASTR5160/week8/HW3quasarfile.dat',
 		format = 'ascii.no_header')
@@ -150,5 +150,5 @@ if (__name__ == '__main__'):
 	# NP Labeling the graph
 	plt.legend()
 	# NP Creating a legend
-	plt.savefig('/d/www/nikhil/public_html/ASTR5160/homework3.png')
+	plt.savefig('/d/www/nikhil/public_html/ASTR5160/images/homework3.png')
 	# NP Saving figure

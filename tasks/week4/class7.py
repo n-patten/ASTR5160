@@ -23,5 +23,5 @@ ax.scatter(ra, dec, marker = 'o', color = 'g', s = 0.7, alpha = 0.5)
 xlab = ['14h', '16h', '18h', '20h', '22h', '0h', '2h', '4h', '6h', '8h', '10h']
 ax.set_xticklabels(xlab, weight = 800)
 ax.grid(color = 'b', linestyle = 'dashed', linewidth = 2)
-plt.savefig('/d/www/nikhil/public_html/lambert.png') #Saving Plot
+plt.savefig('/d/www/nikhil/public_html/ASTR5160/images/lambert.png') #Saving Plot
 #Lambert and Aitoff plots created, Task 2 finished.

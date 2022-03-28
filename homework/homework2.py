@@ -52,7 +52,7 @@ def aitoffplot(amin, amax, dmin, dmax):
     # NP Creating a legend for the plot
     plt.title('Aitoff projection of lat-lon rectangles')
     # NP Creating a title for the plot
-    plt.savefig('/d/www/nikhil/public_html/ASTR5160/aitofflatlon.png')
+    plt.savefig('/d/www/nikhil/public_html/ASTR5160/images/aitofflatlon.png')
     # NP Saving figure
 
 def populatesphere(amin, amax, dmin, dmax):
