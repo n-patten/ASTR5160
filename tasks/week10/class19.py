@@ -108,5 +108,3 @@ print(len(qsos))
 # NP There are 275 quasars that are within 3 degrees of (a,d) = (180, 30)
 # NP that are PSF objects and are brighter than r = 20
 # NP Task 3 complete
-
-
