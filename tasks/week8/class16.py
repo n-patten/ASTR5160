@@ -53,7 +53,7 @@ def whichsweep(ra, dec, sweepfiles):
         # NP Looping through all of the sweep files
         rmin, rmax, dmin, dmax = decode_sweep_name(i)
         # NP Defining rmin, rmax, dmin and dmax for all sweep files
-        ii = (ra < rmax) & (ra > rmin) & (dec < dmax) & (dec > dmin)
+        ii = (ra <= rmax) & (ra >= rmin) & (dec <= dmax) & (dec >= dmin)
         # NP Finding if any sweep files contain inputted RA/DEC
         if (ii.any()):
             files.append(os.path.basename(i))
