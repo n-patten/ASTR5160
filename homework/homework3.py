@@ -4,9 +4,9 @@ import numpy as np
 from numpy.random import random
 from astropy.table import Table
 from astropy.coordinates import SkyCoord
-from tasks.week5.class10 import boundedbyra
-from tasks.week5.class10 import boundedbydec
-from tasks.week5.class10 import boundedbyraanddec
+from tasks.week05.class10 import boundedbyra
+from tasks.week05.class10 import boundedbydec
+from tasks.week05.class10 import boundedbyraanddec
 from homework.homework2 import area
 # NP Necessary imports
 
