@@ -45,23 +45,23 @@ def decode_sweep_name(sweepname):
 # NP This was used to obtain the ramin, ramax, dmin and dmax for each sweep file
 
 def whichsweep(ra, dec, sweepfiles):
-    '''Takes in a list of RA/DEC and sweepfiles and returns which 
-    sweep files contain these RA/DEC.'''
-    files = []
-    # NP This will be the list of files that contain the inputted objects
-    for i in sweepfiles:
+	'''Takes in a list of RA/DEC and sweepfiles and returns which 
+	sweep files contain these RA/DEC.'''
+	files = []
+	# NP This will be the list of files that contain the inputted objects
+	for i in sweepfiles:
         # NP Looping through all of the sweep files
-        rmin, rmax, dmin, dmax = decode_sweep_name(i)
-        # NP Defining rmin, rmax, dmin and dmax for all sweep files
-        ii = (ra <= rmax) & (ra >= rmin) & (dec <= dmax) & (dec >= dmin)
-        # NP Finding if any sweep files contain inputted RA/DEC
-        if (ii.any()):
-            files.append(os.path.basename(i))
-            # NP Appending any sweep files that contain the points
+		rmin, rmax, dmin, dmax = decode_sweep_name(i)
+        	# NP Defining rmin, rmax, dmin and dmax for all sweep files
+		ii = (ra <= rmax) & (ra >= rmin) & (dec <= dmax) & (dec >= dmin)
+        	# NP Finding if any sweep files contain inputted RA/DEC
+		if (ii.any()):
+			files.append(os.path.basename(i))
+			# NP Appending any sweep files that contain the points
 
-    return(set(files))
-    # NP Returning the sweep files that contain any inputted points, removing
-    # NP duplicates
+	return(set(files))
+    	# NP Returning the sweep files that contain any inputted points, removing
+    	# NP duplicates
 
 def class16():
 	table = Table.read('/d/scratch/ASTR5160/data/first/first_08jul16.'
