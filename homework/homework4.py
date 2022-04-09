@@ -290,14 +290,14 @@ if(__name__ == '__main__'):
 	sweepsnames = whichsweep(firstobjs.ra.value, firstobjs.dec.value, sweeps)
 	objs = matchsweeps(firstobjs, sweepsnames)
 	fluxes = findfluxes(objs)
-	# NP Prints ubrite1: 19.262194 at (152.27755156,49.0243456)
-	# NP SDSS Spectrum gives MgII 2799 at 7795. z is therefore
-	# NP ~1.785. At this redshift, the u band, 3543, corresponds
-	# NP to 1272. This is the Lyman a line. Therefore, this object
-	# NP appears so bright in the u band because the Ly a line has
-	# NP been redshifted into the u band! This object's spectrum
-	# NP Is very strong in the IR indicating this object is likely
-	# NP a quasar.
+	print('Prints ubrite1: 19.262194 at (152.27755156,49.0243456)')
+	print('SDSS Spectrum gives MgII 2799 at 7795. z is therefore')
+	print('~1.785. At this redshift, the u band, 3543, corresponds')
+	print('to 1272. This is the Lyman a line. Therefore, this object')
+	print('appears so bright in the u band because the Ly a line has')
+	print('been redshifted into the u band! This object\'s spectrum')
+	print('is very strong in the IR indicating this object is likely')
+	print('a quasar.')
 	plotfluxes(fluxes)
 	# NP As I mentioned in my email, this module appears to give
 	# NP inconsistent results. For the same inputs, the module
