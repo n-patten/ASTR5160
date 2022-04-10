@@ -272,7 +272,7 @@ if(__name__ == '__main__'):
 		module will calculate the fluxes for the brightest u-band\
 		object in the ugriz and W1W2W3W4 bands and generate a plot\
 		of flux density versus wavelength for this object. The\
-		matchSDSS method heavily sourced Dr. Myers SDSSDR9query.py\
+		matchSDSS method heavily sourced Dr. Myers\' SDSSDR9query.py\
 		file in /d/scratch/ASTR5160/week8.')
 	parser.add_argument('RA', type = float, help = 'Right ascension \
 		in degrees to search around.')
