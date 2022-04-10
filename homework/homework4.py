@@ -36,9 +36,9 @@ def whichfirst(ra, dec, t):
 		unit = u.deg, frame = 'icrs')
 	# NP Creating a SkyCoord object for the RA/Dec to search around
 	idx1, idx2, spe2d, dist3d = \
-		SkyCoord.search_around_sky(cfirst, ctarget, seplimit = t*u.deg)
+		ctarget.search_around_sky(cfirst, seplimit = t*u.deg)
 	# NP Searching around the sky of the target RA/Dec
-	firstobjs = cfirst[idx2]
+	firstobjs = cfirst[idx1]
 	# NP Creating FIRST objects that are within a given radius of
 	# NP the target RA/Dec
 	print(str(len(firstobjs))+' FIRST objects found within '
@@ -80,9 +80,9 @@ def matchsweeps(objs, names, r = 22, W1minusW2 = 0.5):
 	# NP FIRST objects.
 	csweeps = SkyCoord(sweepsra, sweepsdec, unit = u.deg, frame = 'icrs')
 	idx1, idx2, d2d, d3d = \
-		SkyCoord.search_around_sky(objs, csweeps, (1)*u.arcsec)
+		csweeps.search_around_sky(objs, (1)*u.arcsec)
 	# NP Matching FIRST objects to sweep objects
-	print(str(len(objs[idx2])) +' sources matched.')
+	print(str(len(objs_all[idx2])) +' sources matched.')
 	# NP Printing how many objects were matched
 	return objs_all[idx2]
 
@@ -232,8 +232,7 @@ def findfluxes(objs):
 	# NP Returning all fluxes
 	return fluxes
 
-def plotfluxes(fluxes, save = False, dir = \
-	'/d/www/nikhil/public_html/ASTR5160/images/'):
+def plotfluxes(fluxes):
 	'''Generates a plot of flux densities versus wavelength
 	for an SDSS object.
 	---------------------------------------------
@@ -275,11 +274,11 @@ if(__name__ == '__main__'):
 		of flux density versus wavelength for this object. The\
 		matchSDSS method heavily sourced Dr. Myers SDSSDR9query.py\
 		file in /d/scratch/ASTR5160/week8.')
-	parser.add_argument('RA', type = int, help = 'Right ascension \
+	parser.add_argument('RA', type = float, help = 'Right ascension \
 		in degrees to search around.')
-	parser.add_argument('DEC', type = int, help = 'Declination in \
+	parser.add_argument('DEC', type = float, help = 'Declination in \
 		degrees to search around.')
-	parser.add_argument('radius', type = int, help = 'Radius in \
+	parser.add_argument('radius', type = float, help = 'Radius in \
 		degrees to search around target RA/Dec. Default value \
 		is 3 degrees.')
 	args = parser.parse_args()
@@ -290,19 +289,15 @@ if(__name__ == '__main__'):
 	sweepsnames = whichsweep(firstobjs.ra.value, firstobjs.dec.value, sweeps)
 	objs = matchsweeps(firstobjs, sweepsnames)
 	fluxes = findfluxes(objs)
-	print('Prints ubrite1: 19.262194 at (152.27755156,49.0243456)')
-	print('SDSS Spectrum gives MgII 2799 at 7795. z is therefore')
-	print('~1.785. At this redshift, the u band, 3543, corresponds')
-	print('to 1272. This is the Lyman a line. Therefore, this object')
-	print('appears so bright in the u band because the Ly a line has')
-	print('been redshifted into the u band! This object\'s spectrum')
-	print('is very strong in the IR indicating this object is likely')
-	print('a quasar.')
+	print('Prints ubrite1: 18.093157 at (160.66713674,48.56763031)')
+	print('SDSS Spectrum gives [MgII] 2799A at 5699A. z is therefore')
+	print('~1.036. At this redshift, the r band, 6231A, corresponds')
+	print('to 3060A in the galaxy\'s frame. This is very close to')
+	print('the Mg II line. Therefore, this object appears so bright')
+	print('in the r band because of the strong [MgII] emission from')
+	print('this object. In addition, the [CIII] 1908A line has been')
+	print('redshifted to ~3800A. This is why this object is so bright')
+	print('in the u band. These features, coupled with the strong')
+	print('W flux densities makes this object very likely to be a')
+	print('quasar.')
 	plotfluxes(fluxes)
-	# NP As I mentioned in my email, this module appears to give
-	# NP inconsistent results. For the same inputs, the module
-	# NP finds different u objects for an unknown reason. Some of
-	# NP these objects found appears to be outside of the range of
-	# NP search_around_sky parameter which is extremely confusing.
-	# NP I have no idea why this is happening but if my module doesn't
-	# NP give the right object at first, try running it again.
