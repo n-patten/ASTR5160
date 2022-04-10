@@ -279,8 +279,7 @@ if(__name__ == '__main__'):
 	parser.add_argument('DEC', type = float, help = 'Declination in \
 		degrees to search around.')
 	parser.add_argument('radius', type = float, help = 'Radius in \
-		degrees to search around target RA/Dec. Default value \
-		is 3 degrees.')
+		degrees to search around target RA/Dec.')
 	args = parser.parse_args()
 	firstobjs = whichfirst(args.RA, args.DEC, args.radius)
 	files = os.listdir('/d/scratch/ASTR5160/data/legacysurvey/dr9/'
