@@ -1,9 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from astropy.table import Table
+# NP Necessary imports
 
 data = Table.read('/d/scratch/ASTR5160/week13/line.data', format = 'ascii')
+# NP Reading in data
 print(data)
+# NP Printing data
 
 mean1 = np.mean(data['col1'])
 var1 = np.var(data['col1'])
@@ -54,10 +57,12 @@ mean10 = np.mean(data['col10'])
 var10 = np.var(data['col10'])
 print('mean: ' +str(mean10))
 print('var: ' +str(var10))
+# NP Defining all the means and variances
 
 f = plt.figure()
 f.set_figwidth(8)
 f.set_figheight(6)
+# NP Making figure larger
 plt.scatter(np.linspace(0.5, 0.5, 20), data['col1'], color = 'red', label = 'data')
 plt.scatter(np.linspace(1.5, 1.5, 20), data['col2'], color = 'red')
 plt.scatter(np.linspace(2.5, 2.5, 20), data['col3'], color = 'red')
@@ -68,12 +73,17 @@ plt.scatter(np.linspace(6.5, 6.5, 20), data['col7'], color = 'red')
 plt.scatter(np.linspace(7.5, 7.5, 20), data['col8'], color = 'red')
 plt.scatter(np.linspace(8.5, 8.5, 20), data['col9'], color = 'red')
 plt.scatter(np.linspace(9.5, 9.5, 20), data['col10'], color = 'red')
+# NP Scattering data at midpoint for each bin
 x = np.linspace(0, 10, 100)
 yfit = 5 + 3*x
+# NP Defining my estimation of the line of best fit
 plt.plot(x, yfit, 'b', label = 'fit')
+# NP Plotting fitted liune
 plt.legend()
+# NP Creating legend
 plt.xlabel('x bin')
 plt.ylabel('Measurement')
+# NP Labelin axes
 
 X2 = (mean1-5-3*(0.5))**2/var1\
     +(mean2-5-3*(1.5))**2/var2\
@@ -86,5 +96,7 @@ X2 = (mean1-5-3*(0.5))**2/var1\
     +(mean9-5-3*(8.5))**2/var9\
     +(mean10-5-3*(9.5))**2/var10
 print('X^2: ' +str(X2))
+# Calculating and printing chi^2
 
 plt.show()
+# NP Showing plot
