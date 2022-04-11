@@ -249,17 +249,14 @@ def plotfluxes(fluxes):
 		120000, 220000]
 	# NP These are the wavelengths in angstroms for all the bandpasses
 	# NP that we have fluxes for
-	fl = [(i*10**(-9))/(y*10**(-10)) for i,y in zip(fluxes,\
-		lambdas)]
-	# NP Creating a flux density variable
 	f = plt.figure()
 	f.set_figwidth(8)
 	f.set_figheight(6)
 	# NP Making figure larger
-	plt.scatter(lambdas, fl, color = 'g')
+	plt.scatter(lambdas, fluxes, color = 'g')
 	# NP Plotting points
 	plt.xlabel('Wavelength (Angstroms)')
-	plt.ylabel('fλ (Mgy/Angstrom)')
+	plt.ylabel('fλ (nMgy)')
 	plt.title('Flux density plotted over Wavelength for '
 		'brightest u object')
 	# NP Labeling graph
