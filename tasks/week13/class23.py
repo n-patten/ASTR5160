@@ -63,40 +63,52 @@ f = plt.figure()
 f.set_figwidth(8)
 f.set_figheight(6)
 # NP Making figure larger
-plt.scatter(np.linspace(0.5, 0.5, 20), data['col1'], color = 'red', label = 'data')
-plt.scatter(np.linspace(1.5, 1.5, 20), data['col2'], color = 'red')
-plt.scatter(np.linspace(2.5, 2.5, 20), data['col3'], color = 'red')
-plt.scatter(np.linspace(3.5, 3.5, 20), data['col4'], color = 'red')
-plt.scatter(np.linspace(4.5, 4.5, 20), data['col5'], color = 'red')
-plt.scatter(np.linspace(5.5, 5.5, 20), data['col6'], color = 'red')
-plt.scatter(np.linspace(6.5, 6.5, 20), data['col7'], color = 'red')
-plt.scatter(np.linspace(7.5, 7.5, 20), data['col8'], color = 'red')
-plt.scatter(np.linspace(8.5, 8.5, 20), data['col9'], color = 'red')
-plt.scatter(np.linspace(9.5, 9.5, 20), data['col10'], color = 'red')
-# NP Scattering data at midpoint for each bin
 x = np.linspace(0, 10, 100)
-yfit = 5 + 3*x
-# NP Defining my estimation of the line of best fit
-plt.plot(x, yfit, 'b', label = 'fit')
-# NP Plotting fitted liune
-plt.legend()
-# NP Creating legend
+m = np.linspace(2.5, 3.5, 11)
+b = np.linspace(0, 10, 11)
+for slope in m:
+    for inter in b:
+        yfit = slope*x +inter
+        plt.plot(x, yfit, 'b', label = 'fit')
+# NP Plotting several lines to fit the data with different slopes and
+# NP intercepts
+plt.plot(np.linspace(0.5, 0.5, 20), data['col1'], 'or')
+plt.plot(np.linspace(1.5, 1.5, 20), data['col2'], 'or')
+plt.plot(np.linspace(2.5, 2.5, 20), data['col3'], 'or')
+plt.plot(np.linspace(3.5, 3.5, 20), data['col4'], 'or')
+plt.plot(np.linspace(4.5, 4.5, 20), data['col5'], 'or')
+plt.plot(np.linspace(5.5, 5.5, 20), data['col6'], 'or')
+plt.plot(np.linspace(6.5, 6.5, 20), data['col7'], 'or')
+plt.plot(np.linspace(7.5, 7.5, 20), data['col8'], 'or')
+plt.plot(np.linspace(8.5, 8.5, 20), data['col9'], 'or')
+plt.plot(np.linspace(9.5, 9.5, 20), data['col10'], 'or')
+# NP Plotting data
 plt.xlabel('x bin')
 plt.ylabel('Measurement')
-# NP Labelin axes
-
-X2 = (mean1-5-3*(0.5))**2/var1\
-    +(mean2-5-3*(1.5))**2/var2\
-    +(mean3-5-3*(2.5))**2/var3\
-    +(mean4-5-3*(3.5))**2/var4\
-    +(mean5-5-3*(4.5))**2/var5\
-    +(mean6-5-3*(5.5))**2/var6\
-    +(mean7-5-3*(6.5))**2/var7\
-    +(mean8-5-3*(7.5))**2/var8\
-    +(mean9-5-3*(8.5))**2/var9\
-    +(mean10-5-3*(9.5))**2/var10
-print('X^2: ' +str(X2))
-# Calculating and printing chi^2
-
+# NP Labeling axes
 plt.show()
-# NP Showing plot
+# Displaying graph
+
+X2mb = []
+for i in m:
+    row = []
+    for inter in b:
+        X2 = (mean1-inter-i*(0.5))**2/var1\
+            +(mean2-inter-i*(1.5))**2/var2\
+            +(mean3-inter-i*(2.5))**2/var3\
+            +(mean4-inter-i*(3.5))**2/var4\
+            +(mean5-inter-i*(4.5))**2/var5\
+            +(mean6-inter-i*(5.5))**2/var6\
+            +(mean7-inter-i*(6.5))**2/var7\
+            +(mean8-inter-i*(7.5))**2/var8\
+            +(mean9-inter-i*(8.5))**2/var9\
+            +(mean10-inter-i*(9.5))**2/var10
+        print('m = ' +str(i) +', b = ' +str(inter) +', X^2: ' +str(X2))
+        row.append(X2)
+    X2mb.append(row)
+# Calculating and printing chi^2 for all slope and intercept values
+
+print('Best fit slope: ' +str(m[np.where(X2mb == np.min(X2mb))[0]].item()))
+print('Best fit intercept: '+ str(b[np.where(X2mb == np.min(X2mb))[1]].item()))
+
+# NP Displaying best fit parameters based on minimum chi squared
