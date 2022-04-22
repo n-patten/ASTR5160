@@ -26,7 +26,7 @@ slopes = np.array(np.repeat(0,10000), dtype = float)
 slopes[0] = 3.0
 # NP Generating an empty list of slopes with an inital guess
 ints = np.array(np.repeat(0,10000), dtype = float)
-ints[0] = 5.0
+ints[0] = 4.7
 # NP Generating an empty list of intercepts with an inital guess
 for i in range(len(slopes)-1):
 	curslope = slopes[i]
