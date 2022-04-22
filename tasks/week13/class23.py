@@ -63,9 +63,9 @@ f = plt.figure()
 f.set_figwidth(8)
 f.set_figheight(6)
 # NP Making figure larger
-x = np.linspace(0, 10, 100)
-m = np.linspace(2.5, 3.5, 11)
-b = np.linspace(0, 10, 11)
+x = np.linspace(0, 10, 11)
+m = np.linspace(2.5, 3.5, 101)
+b = np.linspace(2, 8, 101)
 for slope in m:
     for inter in b:
         yfit = slope*x +inter
