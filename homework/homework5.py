@@ -1,6 +1,7 @@
 import argparse
 import numpy as np
 from astropy.table import Table
+# NP Necessary imports
 
 def W1mag(objs):
 	'''Calculates the W1 magnitude from a table of inputted objects.
@@ -86,6 +87,9 @@ def zmag(objs):
 	z = 22.5-2.5*np.log10(objs['FLUX_Z']/objs['MW_TRANSMISSION_Z'])
 	return z
 
+# NP Functions for calculating the magnitudes quickly. Magnitudes are
+# NP calculated from fluxes corrected for galaxtic extinction.
+
 def splendid_function(objs):
 	'''Displays which of the inputted table of objects is a quasar
 	determined using color-cuts and proper motions.
@@ -105,17 +109,35 @@ def splendid_function(objs):
 	r = rmag(objs)
 	g = gmag(objs)
 	z = zmag(objs)
+	# NP Calculating the magnitudes in each band
 	ii = (r -W1 > (g -z -1)) & (objs['TYPE'] == 'PSF') &\
+		# NP Applied a r-W1/g-z color cut and limited to PSF's
 		(z - W1 > (0.4*(r-W1)-.3)) &\
+		# NP Applied a z-W1/r-W1 color cut
 		(objs['PMDEC'] > -1.4) & (objs['PMDEC'] < 1.4) &\
+		# NP Limiting objects by proper motion in Dec
 		(z - W1 > (0.8*(g-r)-0.8)) &\
+		# NP Applied a z-W1/g-r color cut
 		(r - W4 > (-2*(g-W3)+6.5)) & (r-W1 > 1.8*(r-z)-0.8) &\
+		# NP Applied a r-W4/g-W3 and r-W1/r-z color cut
 		(W1-W2 > -.2) & (r < 19) & (objs['PMRA'] > -1.4) &\
+		# NP Applied a W1-W2 color cut (the quasars seemed to
+		# NP be redder in this color specifically) and limited
+		# NP proper motion in RA
 		(objs['PMRA'] < 1.4) & (r - W1 > (2*(g-r)-1)) &\
+		# NP Limited proper motion in RA and applied a r-W1/g-r
+		# NP color cut.
 		(W1 - W4 > (-10*(W1-W2)-0.8)) & (g-W3 > 1.0*(r-z)+1.2) &\
+		# NP Applied W1-W4/W1-W2 and g-W3/r-z color cuts
 		(r - W1 > (-1*(W1-W3)+1.5))
+		# NP Applied r-W1/W1-W3 color cut
 	print(str(len(objs[ii])) +' quasars found.')
 	return np.array(ii)
+
+# NP I used many different color cuts to whittle down the number of
+# NP detected quasars. I also applied limits on proper motion in both
+# NP RA and Dec. My reasoning for this is that quasars are outside of
+# NP the Milky Way and should therefore have very small proper motions.
 
 if (__name__ == '__main__'):
 	parser = argparse.ArgumentParser(description = 'Module to identify\
@@ -123,7 +145,12 @@ if (__name__ == '__main__'):
 		contain the same data columns as the sweep files found in\
 		/d/scratch/ASTR5160/data/legacysurvey/dr9/north/sweep/9.0.')
 	parser.add_argument('path', type = str, help = 'Path to the file.')
+	# NP Defining parser path argument
 	args = parser.parse_args()
+	# NP Adding parser argument to run at command line
 	sweepfile = args.path
+	# NP Defining path to file
 	objs = Table.read(sweepfile)
+	# NP Creating a table with the inputted path
 	splendid_function(objs)
+	# NP Running splendid_function
