@@ -111,26 +111,26 @@ def splendid_function(objs):
 	z = zmag(objs)
 	# NP Calculating the magnitudes in each band
 	ii = (r -W1 > (g -z -1)) & (objs['TYPE'] == 'PSF') &\
-		# NP Applied a r-W1/g-z color cut and limited to PSF's
 		(z - W1 > (0.4*(r-W1)-.3)) &\
-		# NP Applied a z-W1/r-W1 color cut
 		(objs['PMDEC'] > -1.4) & (objs['PMDEC'] < 1.4) &\
-		# NP Limiting objects by proper motion in Dec
 		(z - W1 > (0.8*(g-r)-0.8)) &\
-		# NP Applied a z-W1/g-r color cut
 		(r - W4 > (-2*(g-W3)+6.5)) & (r-W1 > 1.8*(r-z)-0.8) &\
-		# NP Applied a r-W4/g-W3 and r-W1/r-z color cut
 		(W1-W2 > -.2) & (r < 19) & (objs['PMRA'] > -1.4) &\
-		# NP Applied a W1-W2 color cut (the quasars seemed to
-		# NP be redder in this color specifically) and limited
-		# NP proper motion in RA
 		(objs['PMRA'] < 1.4) & (r - W1 > (2*(g-r)-1)) &\
-		# NP Limited proper motion in RA and applied a r-W1/g-r
-		# NP color cut.
 		(W1 - W4 > (-10*(W1-W2)-0.8)) & (g-W3 > 1.0*(r-z)+1.2) &\
-		# NP Applied W1-W4/W1-W2 and g-W3/r-z color cuts
 		(r - W1 > (-1*(W1-W3)+1.5))
-		# NP Applied r-W1/W1-W3 color cut
+	# NP Applied a r-W1/g-z color cut and limited to PSF's
+	# NP Applied a z-W1/r-W1 color cut
+	# NP Limiting objects by proper motion in Dec
+	# NP Applied a z-W1/g-r color cut
+	# NP Applied a r-W4/g-W3 and r-W1/r-z color cut
+	# NP Applied a W1-W2 color cut (the quasars seemed to
+	# NP be redder in this color specifically) and limited
+	# NP proper motion in RA
+	# NP Limited proper motion in RA and applied a r-W1/g-r
+	# NP color cut.
+	# NP Applied W1-W4/W1-W2 and g-W3/r-z color cuts
+	# NP Applied r-W1/W1-W3 color cut
 	print(str(len(objs[ii])) +' quasars found.')
 	return np.array(ii)
 
