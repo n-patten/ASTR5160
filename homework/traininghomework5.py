@@ -5,6 +5,7 @@ from astropy import units as u
 from astropy.table import Table, vstack
 from astropy.coordinates import SkyCoord
 from tasks.week08.class16 import whichsweep
+from homework.homework5 import splendid_function
 # NP Necessary imports
 
 def matchsweeps(objs, names, r = 19):
@@ -258,3 +259,8 @@ if(__name__ == '__main__'):
 	print(np.min(restsweeps['PMDEC']))
 	print(np.max(restsweeps['PMDEC']))
 	# NP Printing proper motions in RA and Dec for non-quasars
+
+	splendid_function(qsweeps)
+	# NP Correctly identifies 146/172 as quasars
+	splendid_function(restsweeps)
+	# NP Mistakenly identifies 6/1000 as quasars
