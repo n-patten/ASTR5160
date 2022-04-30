@@ -11,7 +11,7 @@ def W1mag(objs):
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	Outputs
 	W1: float. The W1 magnitude of each object in the objs table.'''
-	W1 = 22.5-2.5*np.log10(objs['FLUX_W1'])
+	W1 = 22.5-2.5*np.log10(objs['FLUX_W1']/objs['MW_TRANSMISSION_W1'])
 	return W1
 
 def W2mag(objs):
@@ -23,7 +23,7 @@ def W2mag(objs):
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	Outputs
 	W2: float. The W2 magnitude of each object in the objs table.'''
-	W2 = 22.5-2.5*np.log10(objs['FLUX_W2'])
+	W2 = 22.5-2.5*np.log10(objs['FLUX_W2']/objs['MW_TRANSMISSION_W2'])
 	return W2
 
 def W3mag(objs):
@@ -35,7 +35,7 @@ def W3mag(objs):
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	Outputs
 	W3: float. The W3 magnitude of each object in the objs table.'''
-	W3 = 22.5-2.5*np.log10(objs['FLUX_W3'])
+	W3 = 22.5-2.5*np.log10(objs['FLUX_W3']/objs['MW_TRANSMISSION_W3'])
 	return W3
 
 def W4mag(objs):
@@ -47,7 +47,7 @@ def W4mag(objs):
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	Outputs
 	W4: float. The W4 magnitude of each object in the objs table.'''
-	W4 = 22.5-2.5*np.log10(objs['FLUX_W4'])
+	W4 = 22.5-2.5*np.log10(objs['FLUX_W4']/objs['MW_TRANSMISSION_W4'])
 	return W4
 
 def rmag(objs):
@@ -59,19 +59,7 @@ def rmag(objs):
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	Outputs
 	r: float. The r magnitude of each object in the objs table.'''
-	r = 22.5-2.5*np.log10(objs['FLUX_R'])
-	return r
-
-def rmag(objs):
-	'''Calculates the r magnitude from a table of inputted objects.
-	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	Inputs
-	-objs: astropy.Table. A table containing data found the sweep
-	files.
-	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	Outputs
-	r: float. The r magnitude of each object in the objs table.'''
-	r = 22.5-2.5*np.log10(objs['FLUX_R'])
+	r = 22.5-2.5*np.log10(objs['FLUX_R']/objs['MW_TRANSMISSION_R'])
 	return r
 
 def gmag(objs):
@@ -83,7 +71,7 @@ def gmag(objs):
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	Outputs
 	g: float. The g magnitude of each object in the objs table.'''
-	g = 22.5-2.5*np.log10(objs['FLUX_G'])
+	g = 22.5-2.5*np.log10(objs['FLUX_G']/objs['MW_TRANSMISSION_G'])
 	return g
 
 def zmag(objs):
@@ -95,7 +83,7 @@ def zmag(objs):
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	Outputs
 	z: float. The z magnitude of each object in the objs table.'''
-	z = 22.5-2.5*np.log10(objs['FLUX_Z'])
+	z = 22.5-2.5*np.log10(objs['FLUX_Z']/objs['MW_TRANSMISSION_Z'])
 	return z
 
 def splendid_function(objs):
@@ -127,15 +115,14 @@ def splendid_function(objs):
 		(W1 - W4 > (-10*(W1-W2)-0.8)) & (g-W3 > 1.0*(r-z)+1.2) &\
 		(r - W1 > (-1*(W1-W3)+1.5))
 	print(str(len(objs[ii])) +' quasars found.')
-	return ii
+	return np.array(ii)
 
 if (__name__ == '__main__'):
 	parser = argparse.ArgumentParser(description = 'Module to identify\
 		potential quasars from an inputted file. This file must\
 		contain the same data columns as the sweep files found in\
 		/d/scratch/ASTR5160/data/legacysurvey/dr9/north/sweep/9.0.')
-	parser.add_argument('path', type = str, help = 'Path to the \
-		file.')
+	parser.add_argument('path', type = str, help = 'Path to the file.')
 	args = parser.parse_args()
 	sweepfile = args.path
 	objs = Table.read(sweepfile)
