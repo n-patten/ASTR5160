@@ -176,7 +176,7 @@ def linear(x, y, variances):
 	# NP Plotting generated fit to data
 	flat_samples = sampler.get_chain(discard=100, thin=15, flat=True)
 	fig = corner.corner(flat_samples, labels = labels,\
-		truths=[m_true, b_true])
+		truths=[mguess[0], bguess[0]])
 	# NP Generating corner plots
 	plt.show()
 	# NP Displaying graphs
@@ -241,7 +241,7 @@ def quadratic(x, y, variances):
 	# NP Plotting generated fit to data		
 	flat_samples = sampler.get_chain(discard=100, thin=15, flat=True)
 	fig = corner.corner(flat_samples, labels = labels,\
-		truths=[a2_true, a1_true, a0_true])
+		truths=[a2guess[0], a1guess[0], a0guess[0]])
 	# NP Generating corner plots
 	plt.show()
 
