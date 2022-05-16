@@ -23,7 +23,7 @@ def log_likelihood(theta, x, y, yerr):
 	model = np.multiply(m,x) + b
 	# NP Defining model line from inputted slope and intercept
 	sigma2 = yerr
-	return -0.5 * np.sum((y - model) ** 2 / sigma2 + np.log(sigma2))
+	return -0.5 * np.sum((y - model) ** 2 / sigma2 + np.log(2*np.pi*sigma2))
 	# NP Calculating and returning likelihood
 
 def log_likelihood2(theta, x, y, yerr):
@@ -43,7 +43,7 @@ def log_likelihood2(theta, x, y, yerr):
 	model = np.multiply(a2, np.square(x)) +np.multiply(a1, x) + a0
 	# NP Defining model quadratic function from inputted coefficients
 	sigma2 = yerr
-	return -0.5 * np.sum((y - model) ** 2 / sigma2 + np.log(sigma2))
+	return -0.5 * np.sum((y - model) ** 2 / sigma2 + np.log(sigma2*2*np.pi))
 	# NP Calculating and returning likelihood
 
 def log_prior(theta):
